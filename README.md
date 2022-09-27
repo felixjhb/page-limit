@@ -2,7 +2,7 @@
 A macro to introduce a user-set page limit for LaTeX projects. To use this macro, include this file in your LaTeX project and include the following two lines in your document's preamble:
 
 ```
-\include{ar1_macros}
+\include{page-limit}
 \pagelimit{20}
 ```
 
