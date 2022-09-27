@@ -1,0 +1,26 @@
+\makeatletter
+\newcounter{pagecount}
+\newcounter{errorcreated}
+\newcommand{\pagelimit}[1]{
+    \setcounter{errorcreated}{0}
+    \setcounter{pagecount}{0}
+    \gdef\maxpages{#1}
+    \ifx\latex@outputpage\@undefined\relax
+        \global\let\latex@outputpage\@outputpage
+    \fi
+    \gdef\@outputpage{
+        \addtocounter{pagecount}{1}
+        \ifnum\value{pagecount}>\maxpages\relax
+            \ifnum\value{errorcreated}<1\relax
+                \latex@outputpage
+                \addtocounter{errorcreated}{1}
+                \GenericError{}{Page limit breached}{\@gobble}{The document has compiled past your set limit of #1 pages. You should edit the content of your document to fit within this limit this, or reconsider the page limit.}
+            \else
+                \latex@outputpage
+            \fi
+        \else
+            \latex@outputpage
+        \fi
+    }
+}
+\makeatother
